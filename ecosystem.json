@@ -39,7 +39,7 @@
       ref: "origin/master",
       repo: "git@github.com:chrisspiegl/firmware-notifications.git",
       path: "/home/node/firmware-notifications.chrisspiegl.com/production",
-      "post-deploy": "npm run nsinstall && npm run nsupdate && NODE_ENV=production pm2 gracefulReload ecosystem.json --only fwn-web --env production",
+      "post-deploy": "npm run nsinstall && npm run nsupdate && npm run nsauditfix && NODE_ENV=production pm2 gracefulReload ecosystem.json --only fwn-web --env production",
       env: {},
     },
     // dev : {

@@ -8,6 +8,7 @@
     "stop": "pm2 stop ecosystem.json",
     "nsupdate": "echo \"Update - WITHOUT SAVING TO CONFIG FILES\" && npm update --no-save",
     "nsinstall": "echo \"Install - WITHOUT SAVING TO CONFIG FILES\" && npm install --no-save",
+    "nsauditfix": "echo \"Audit Fix - WITHOUT SAVING TO CONFIG FILES\" && npm audit fix --no-save",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
