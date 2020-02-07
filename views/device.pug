@@ -1,0 +1,32 @@
+extends layout
+block content
+  div.container(style="padding: 1rem 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; position: relative; line-height: 3rem;")
+    div
+      a(href="/") All
+      = " > "
+      a(href="/"+manufacturer.slug)= manufacturer.name
+      = " > "
+      = device.name
+    div
+      if req.user
+        if following
+          a.button(href="?unfollow=1", style="font-size: 1rem; padding: .4rem; margin: auto; line-height: 1rem;") Unfollow
+        else
+          a.button(href="?follow=1", style="font-size: 1rem; padding: .4rem; margin: auto; line-height: 1rem;") Follow
+
+  div.container.center
+    p.center Last successfully crawled at
+      = ' '
+      = moment(device.crawledAt).format('YYYY-MM-DD hh:mm:ss')
+      = ' UTC'
+
+  each version in versions
+    div.container.flexContainer(style="width: 100%")
+      div.flexColumn.title
+        h5= version.name
+      div.flexColumn.version
+        p= version.version
+      div.flexColumn.date
+        p= moment(version.date).format('YYYY-MM-DD')
+      div.flexColumn.links
+        a(href=version.url, target="_blank") Release Notes

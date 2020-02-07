@@ -1,0 +1,56 @@
+{
+  /**
+   * Application configuration section
+   * http://pm2.keymetrics.io/docs/usage/application-declaration/
+   */
+  apps : [
+    {
+      name: "fwn-web",
+      append_env_to_name: true,
+      script: "./server/index.js",
+      watch: false,
+      exec_mode: "cluster",
+      // instances: (process.env.NODE_ENV == 'production' || process.env.NODE_ENV == 'development') ? 'max' : 1,
+      instances: 1,
+      log_date_format: "YYYY-MM-DD HH:mm Z",
+      env: {
+        NODE_ENV: 'local',
+        DEBUG: 'sifwn:*',
+      },
+      env_production : {
+        NODE_ENV: "production",
+        DEBUG: 'sifwn:*',
+      },
+      env_development: {
+        NODE_ENV: "development",
+        DEBUG: 'sifwn:*',
+      },
+    },
+  ],
+
+  /**
+   * Deployment section
+   * http://pm2.keymetrics.io/docs/usage/deployment/
+   */
+  deploy : {
+    production : {
+      user: "node",
+      host: "doSpieglCO-node",
+      ref: "origin/master",
+      repo: "git@github.com:chrisspiegl/firmware-notifications.git",
+      path: "/home/node/firmware-notifications.chrisspiegl.com/production",
+      "post-deploy": "npm run nsinstall && npm run nsupdate && NODE_ENV=production pm2 gracefulReload ecosystem.json --only fwn-web --env production",
+      env: {},
+    },
+    // dev : {
+    //   user: "node",
+    //   host: "doSpieglCO-node",
+    //   // ref: "origin/development",
+    //   ref: "origin/master",
+    //   repo: "git@bitbucket.org:spieglco/pushnotice.chat.git",
+    //   path: "/home/node/pushnotice.chat/development",
+    //   "post-deploy": "npm run nsinstall && npm run nsupdate && NODE_ENV=development pm2 gracefulReload ecosystem.json --env development --source-map-support",
+    //   env: {}
+    // }
+  }
+}

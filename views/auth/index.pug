@@ -1,0 +1,15 @@
+extends ../layout
+block content
+
+  .container.center
+    h2 Login with the Magic Link
+    h3 Click the link and sign in through Telegram.
+
+  .container.center
+    a.button(href=telegramUrl) Talk to the Telegram Bot
+
+  form(action='/auth/telegram/signin', accept-charset='UTF-8', data-remote='true', method='post')
+    input(type='hidden', name='utf8', value='✓')
+    input(type='hidden', name='_csrf', value=req.csrfToken())
+    input#token(type='hidden', name='token', value=token)
+    input#authKey(type='hidden', name='authKey', value=authKey)

@@ -1,0 +1,240 @@
+/*!
+ * Magic Starts Here
+ * https://pushnotice.chat
+ */
+
+@import "scss/_reset.scss";
+@import "scss/_keyframes.scss";
+@import "scss/_autohide.scss";
+@import "scss/fontawesome/_font-awesome.scss";
+@import "scss/_header.scss";
+@import "scss/_footer.scss";
+@import "scss/_pageHome.scss";
+
+*, *:before, *:after {
+  box-sizing: border-box;
+  transition: .15s ease-in-out;
+  -webkit-overflow-scrolling: touch; // needed for smooth mobile scrolling
+}
+*::selection {
+  background: #ff202f;
+  color: white;
+}
+body {
+  background-color: #fff;
+}
+.container {
+  margin: auto;
+  width: 80%;
+  max-width: 50rem; // max-width: 1000px;
+  padding-bottom: 2rem;
+}
+.flexContainer {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.flexColumn {
+  flex: 1;
+}
+.flexColumn.title {
+  flex: 4;
+  overflow: hidden;
+}
+.flexColumn.title h5 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.flexColumn.date {
+  flex: 1.2;
+}
+.flexColumn.links {
+  flex: 2;
+  text-align: right;
+}
+
+
+.container.flash {
+  position: relative;
+  padding: 0;
+  .message {
+    z-index: 99999;
+    position: relative;
+    margin: .5rem auto;
+    padding: .5rem .5rem .5rem 1.6rem;
+
+    &:before {
+      position: absolute;
+      left: .2rem;
+      top: .67em;
+      font-family:FontAwesome;
+      font-style:normal;
+      font-weight:400;
+      speak:none;
+      display:inline-block;
+      text-decoration:inherit;
+      width:1em;
+      margin-right:.2em;
+      text-align:center;
+      font-variant:normal;
+      text-transform:none;
+      line-height:1em;
+      margin-left:.2em;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale
+    }
+    &.info:before {
+      content: "\f05a";
+    }
+    &.success:before {
+      content: '\f00c';
+    }
+    &.warning:before {
+      content: '\f071';
+    }
+    &.error:before {
+      content: '\f057';
+    }
+    &.info {
+      color: #00529B;
+      background-color: #BDE5F8;
+    }
+    &.success {
+      color: #4F8A10;
+      background-color: #DFF2BF;
+    }
+    &.warn, &.warning {
+      color: #9F6000;
+      background-color: #FEEFB3;
+    }
+    &.error {
+      color: #D8000C;
+      background-color: #FFD2D2;
+    }
+    &.hide-never {
+      position: relative !important;
+    }
+  }
+}
+@media screen and (min-width:600px) {
+  .container {
+    flex-wrap: nowrap;
+  }
+}
+h1 {
+  font-size: 2.25rem;
+  font-weight: bold;
+  letter-spacing: -1px;
+  line-height: 1.5;
+  text-align: center;
+  padding-bottom: 1.5rem;
+}
+h2 {
+  font-size: 2rem;
+  font-weight: 300;
+  line-height: 2.25rem;
+  letter-spacing: -1px;
+  text-align: center;
+  padding: 0.5rem 0;
+}
+h3 {
+  font-size: 1.75rem;
+  font-weight: 300;
+  line-height: 2rem;
+  text-align: center;
+  padding: 2rem 0 0.5rem;
+}
+h4 {
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 2rem;
+  padding: 1.5rem 0 0.5rem;
+}
+p {
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 300;
+  text-align: left;
+}
+sup {
+  vertical-align: super;
+  font-size: smaller;
+}
+
+.button {
+  display: inline-block;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+  padding: .5em;
+  color: #ffffff;
+  background-color: #cc5630;
+  font-weight: 800;
+  border-radius: .25rem;
+  border: .15rem solid #000000;
+  text-align: center;
+  user-select: none; // text-transform: uppercase;
+  padding: .75em; // font-size: .75em;
+  text-decoration: none;
+  vertical-align: middle;
+  margin: 1.5rem auto;
+  &.passwordless {
+    color: #fff;
+    text-align: center;
+  }
+  &.passwordless, &.twitter {
+    display: inline-block;
+    min-width: 16rem;
+  }
+  &.twitter {
+    background-color: #00aced;
+    border-color: lighten(#00aced, 20%)
+  }
+  &:hover {
+    color: #000000;
+    background-color: #ffffff;
+  }
+  .fa {
+    margin-right: 0.25em;
+  }
+}
+table {
+  width: 90%;
+  margin: auto;
+}
+table thead, table tfoot {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+table td {
+  white-space: nowrap;
+  padding: 0 0.2rem 0.4rem 0;
+}
+table td:last-child {
+  padding-right: 0;
+}
+.center {
+  text-align: center;
+}
+
+@media screen and (max-width: 45em) {
+  h1 {
+    font-size: 2rem;
+  }
+  h2 {
+    font-size: 1.75rem;
+    line-height: 1.25;
+  }
+  h3 {
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+  h4 {
+    font-size: 1.25rem;
+    line-height: 1.2;
+  }
+}
+@media screen and (max-width: 25em) {}

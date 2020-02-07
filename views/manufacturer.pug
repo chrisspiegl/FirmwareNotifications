@@ -1,0 +1,15 @@
+extends layout
+block content
+  div.container(style="padding: 1rem 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; position: relative; line-height: 3rem;")
+    div()
+      a(href="/") All
+      = " > "
+      a(href="/"+manufacturer.slug)= manufacturer.name
+
+  div.container.flexContainer(style="flex-wrap: wrap;")
+    each device in devices
+      a.button(href="/"+manufacturer.slug+"/"+device.slug)= device.name
+        sup
+          = " ("
+          = device.get('countVersions')
+          = ")"

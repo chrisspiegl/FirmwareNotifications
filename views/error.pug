@@ -1,0 +1,11 @@
+extends layout
+block content
+  h3.center #{error.output.statusCode} #{error.output.payload.error}
+  h4.center= error.output.payload.message
+
+  if config.env != 'production'
+    h5(style="margin-top: 2rem") Error Object:
+    pre: code= JSON.stringify(error, null, 2)
+    h5(style="margin-top: 2rem") Stack Trace:
+    pre: code= stack
+

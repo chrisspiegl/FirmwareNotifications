@@ -1,0 +1,60 @@
+extends layout
+block content
+  div.container
+    h1 Know When to Update Your Devices
+    h2 Track Available Firmware Versions for the Gear You Own
+
+  div.container.flexContainer
+    div.flexColumn.center
+      h3 Manufacturers
+      h5= count.manufacturers
+    div.flexColumn.center
+      h3 Devices
+      h5= count.devices
+    div.flexColumn.center
+      h3 Versions
+      h5= count.versions
+
+
+  div.container.flexContainer
+    each manufacturer in manufacturers
+      a.button(href="/"+manufacturer.slug)= manufacturer.name
+        sup
+          = " ("
+          = manufacturer.get('countDevices')
+          = ")"
+
+  div.container
+    h3 Last 10 Firmware Updates
+
+  each version in versions
+    div.container.flexContainer(style="width: 100%")
+      div.flexColumn.title
+        h5
+          a(href="/"+version.Device.Manufacturer.slug+"/"+version.Device.slug)= version.Device.Manufacturer.name + " " + version.Device.name
+      div.flexColumn.version
+        p= version.version
+      div.flexColumn.date
+        p= moment(version.date).format('YYYY-MM-DD')
+      div.flexColumn.links
+        a(href=version.url, target="_blank") Release Notes
+
+  div.container
+    h3 ~ FAQ ~
+    h4 Who is this service for?
+    p Right now the Firmware Notifications is in its early stages. It is a database that automatically tracks the available firmware versions of differnt kinds of devices, currently mostly aimed at cameras.
+
+    h4 Why would you need this?
+    p It's a pain to always try to stay up to date with the latest news regarding all kinds of tech, so it's easier to actualy just get updated about firmware updates which are useful to me without having to also read about all the other new gdagets!
+
+    h4 What does "Alpha v0.1" mean?
+    p This means that the service might not work as expected sometimes. I am working on it and when you find hickups, please message me #[a(href="https://ChrisSpiegl.com", title="Chat with me") on my Website]!
+    p Alpha also means that the use of the Firmware Notifications is completely free for use without limits. As more people start using the service, I may be implementing features at a small monthly fee based on usage and/or premium features (the lowest tier will remain free for personal use and side projects).
+
+    h4 Pricing?
+    p Free for now. I am a real human 🤪 and apparently I need food sometimes. You can support the creation and continued development of the Firmware Notifications by donating through #[a(href="https://buymeacoff.ee/chrisspiegl", title="By me a cup of tea & a cookie?") By Me a Coffee].
+    p.center
+      a.button(href="https://buymeacoff.ee/chrisspiegl", title="Support the Development of PushNotice.chat")
+        i.fa.fa-coffee
+        = ' '
+        | Support Chris with Tea&Cookies
