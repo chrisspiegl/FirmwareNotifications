@@ -23,9 +23,10 @@ const errorResponder = (status, req, res, err) => {
     stack: err.stack
   }
 
-  if (errorObject.code !== 404) { error(err.stack) }
-
-  pnotice(`Error ${status}: ${err.output.payload.error}\n${err.output.payload.message}\n${JSON.stringify(errorObject)}`)
+  if (status !== 404) {
+    error(err.stack)
+    pnotice(`Error ${status}: ${err.output.payload.error}\n${err.output.payload.message}\n${JSON.stringify(errorObject)}`)
+  }
 
   if (res.locals.isApi) {
     // If the request is an API request, definitely respond with API response.
