@@ -1,6 +1,6 @@
 /*!
  * Magic Starts Here
- * https://firmware-notifications.chrisspiegl.com
+ * https://FirmwareNotifications.ChrisSpiegl.com
  */
 $(() => {
 
