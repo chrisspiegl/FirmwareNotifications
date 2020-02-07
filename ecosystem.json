@@ -26,6 +26,72 @@
         DEBUG: 'sifwn:*',
       },
     },
+    {
+      name: "fwn-listener",
+      append_env_to_name: true,
+      script: "./botTelegramListener/index.js",
+      watch: false,
+      exec_mode: "fork",
+      // instances: (process.env.NODE_ENV == 'production' || process.env.NODE_ENV == 'development') ? 'max' : 1,
+      instances: 1,
+      log_date_format: "YYYY-MM-DD HH:mm Z",
+      env: {
+        NODE_ENV: 'local',
+        DEBUG: 'sifwn:*',
+      },
+      env_production : {
+        NODE_ENV: "production",
+        DEBUG: 'sifwn:*',
+      },
+      env_development: {
+        NODE_ENV: "development",
+        DEBUG: 'sifwn:*',
+      },
+    },
+    {
+      name: "fwn-notifier",
+      append_env_to_name: true,
+      script: "./botTelegramNotifier/index.js",
+      watch: false,
+      exec_mode: "fork",
+      // instances: (process.env.NODE_ENV == 'production' || process.env.NODE_ENV == 'development') ? 'max' : 1,
+      instances: 1,
+      log_date_format: "YYYY-MM-DD HH:mm Z",
+      env: {
+        NODE_ENV: 'local',
+        DEBUG: 'sifwn:*',
+      },
+      env_production : {
+        NODE_ENV: "production",
+        DEBUG: 'sifwn:*',
+      },
+      env_development: {
+        NODE_ENV: "development",
+        DEBUG: 'sifwn:*',
+      },
+    },
+    {
+      name: "fwn-crawler",
+      append_env_to_name: true,
+      script: "./crawler/index.js",
+      watch: false,
+      exec_mode: "fork",
+      // instances: (process.env.NODE_ENV == 'production' || process.env.NODE_ENV == 'development') ? 'max' : 1,
+      instances: 1,
+      log_date_format: "YYYY-MM-DD HH:mm Z",
+      env: {
+        NODE_ENV: 'local',
+        DEBUG: 'sifwn:*',
+      },
+      env_production : {
+        NODE_ENV: "production",
+        DEBUG: 'sifwn:*',
+      },
+      env_development: {
+        NODE_ENV: "development",
+        DEBUG: 'sifwn:*',
+      },
+    },
   ],
 
   /**
