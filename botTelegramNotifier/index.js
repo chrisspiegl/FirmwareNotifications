@@ -20,6 +20,7 @@ const models = require('../database/models')
 const init = async () => {
 // Be aware of the all encapsulating init method.
 
+  log('Starting Sending Notification All')
   await models.init() // Loading Database Initialization
   const bot = new BotTelegram(config.telegramBots.fwn.authToken, {
     polling: false, // disabled because it's just a sending worker
@@ -104,6 +105,7 @@ const init = async () => {
     if (userWithDevices.UserTelegram.NotificationTelegrams.length > 0) continue // do not continue if user already got his notification
 
     const idChat = userWithDevices.UserTelegram.idUserTelegram
+    log(`Sending Firmware Update Notification to ${idChat}`)
 
     let report = '*YOU GOT NEW FIRMWARE AVAILABLE*\n\n'
     let sendReport = false
@@ -128,6 +130,9 @@ const init = async () => {
       idChatTelegram: idChat
     })
   }
+
+  log('Finished Sending Notification All')
+  process.exit()
 
 // Be aware of the all encapsulating init method.
 }
