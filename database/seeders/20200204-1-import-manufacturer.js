@@ -58,7 +58,7 @@ module.exports = {
       }
     ]
 
-    for (const manu of manufacturer {
+    for (const manu of manufacturer) {
       manu.idManufacturer = uuid.v4()
       manu.createdAt = new Date()
       manu.updatedAt = new Date()
