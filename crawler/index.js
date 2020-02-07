@@ -51,6 +51,7 @@ const start = async () => {
   }
 
   log('Finished Crawling All')
+  process.exit()
 }
 
 start()
