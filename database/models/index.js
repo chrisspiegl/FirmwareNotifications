@@ -24,6 +24,11 @@ let sequelize
 
 const init = async () => {
   try {
+    if (db.initialized) {
+      const err = new Error();
+      error('Database (sequelize) already initialized, please remove the initialization.', err.stack)
+      return
+    }
     if (configDatabase.use_env_variable) {
       sequelize = new Sequelize(process.env[configDatabase.use_env_variable])
     } else {
@@ -67,6 +72,7 @@ const init = async () => {
 
     db.sequelize = sequelize
     db.Sequelize = Sequelize
+    db.initialized = true
   } catch (err) {
     error('error initializing models', err)
   }

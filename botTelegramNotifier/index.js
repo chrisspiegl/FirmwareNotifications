@@ -8,6 +8,8 @@ log.log = console.log.bind(console)
 const error = debug(`${config.slug}:bot:telegram:notifier:error`)
 
 const BotTelegram = require('node-telegram-bot-api')
+const cron = require('cron')
+const { Op } = require('sequelize')
 const moment = require('moment-timezone')
 
 moment.tz.setDefault('UTC')
@@ -16,20 +18,12 @@ const pnotice = require('pushnotice')(`${config.slug}:bot:telegram:notifier`, { 
 
 const models = require('../database/models')
 
-// Be aware of the all encapsulating init method.
-const init = async () => {
-// Be aware of the all encapsulating init method.
-
+const run = async () => {
   log('Starting Sending Notification All')
-  await models.init() // Loading Database Initialization
+
   const bot = new BotTelegram(config.telegramBots.fwn.authToken, {
     polling: false, // disabled because it's just a sending worker
     webhook: false // disabled because it's just a sending worker
-  })
-
-  // Handle Promise Rejections:
-  process.on('unhandledRejection', (reason, promise) => {
-    error('unhandledRejection', reason.stack || reason, promise)
   })
 
   // Function to send notification to chat
@@ -52,8 +46,6 @@ const init = async () => {
       log(`error sending the following message text to ${idChat}`, messageText, err)
     }
   }
-
-  const Op = models.Sequelize.Op
 
   const daysHavePassed = moment().subtract(14, 'days').toDate()
 
@@ -131,10 +123,41 @@ const init = async () => {
     })
   }
 
-  log('Finished Sending Notification All')
-  process.exit()
-
-// Be aware of the all encapsulating init method.
+  log('Finished Sending Notifications All')
 }
-init()
-// Be aware of the all encapsulating init method.
+
+const start = async () => {
+  log('Starting Crawler')
+  await models.init()
+  const CronJob = cron.CronJob;
+  const job = new CronJob('0 6 * * * *', run, null, true, 'UTC', this, true);
+  job.start();
+}
+start()
+
+// Graceful shutdown
+process.on('SIGINT', async () => {
+  const cleanUp = async () => {
+    // Clean up other resources like DB connections
+    log('closing database connection')
+    await models.sequelize.close()
+  }
+
+  // Force close server after 5secs
+  setTimeout(async (e) => {
+    log('Forcing server close !!!', e)
+
+    await cleanUp()
+    process.exit(1)
+  }, 10000) // 10 seconds
+
+  log('Closing crawler...')
+
+  await cleanUp()
+  process.exit()
+})
+
+process.on('unhandledRejection', async (reason, promise) => {
+  error('unhandledRejection', reason.stack || reason, promise)
+  pnotice(`unhandledRejection:\n${JSON.stringify(reason)}`, 'ERROR')
+})
