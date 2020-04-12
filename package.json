@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "echo \"Restart - GRACEFUL PM2 RELOAD - production\" && NODE_ENV=production pm2 gracefulReload ecosystem.json --env production",
+    "start": "echo \"Restart - GRACEFUL PM2 RELOAD - production\" && NODE_ENV=production pm2 reload ecosystem.json --env production",
     "stop": "pm2 stop ecosystem.json",
+    "deployInstall": "npm run nsinstall && npm run nsupdate && npm run nsauditfix",
     "nsupdate": "echo \"Update - WITHOUT SAVING TO CONFIG FILES\" && npm update --no-save",
     "nsinstall": "echo \"Install - WITHOUT SAVING TO CONFIG FILES\" && npm install --no-save",
     "nsauditfix": "echo \"Audit Fix - WITHOUT SAVING TO CONFIG FILES\" && npm audit fix --no-save",

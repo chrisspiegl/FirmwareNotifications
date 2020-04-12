@@ -104,12 +104,12 @@
    */
   deploy : {
     production : {
-      user: "node",
-      host: "doSpieglCO-node",
+      user: "deploy",
+      host: "swMain",
       ref: "origin/master",
       repo: "git@github.com:chrisspiegl/FirmwareNotifications.git",
-      path: "/home/node/firmwarenotifications.chrisspiegl.com/production",
-      "post-deploy": "npm run nsinstall && npm run nsupdate && npm run nsauditfix && NODE_ENV=production pm2 gracefulReload ecosystem.json --only fwn-web --env production",
+      path: "/home/deploy/firmwarenotifications-production",
+      "post-deploy": "NODE_ENV=production pm2 reload ecosystem.json --only fwn-web --env production",
       env: {},
     },
     // dev : {
@@ -119,7 +119,7 @@
     //   ref: "origin/master",
     //   repo: "git@bitbucket.org:spieglco/pushnotice.chat.git",
     //   path: "/home/node/pushnotice.chat/development",
-    //   "post-deploy": "npm run nsinstall && npm run nsupdate && NODE_ENV=development pm2 gracefulReload ecosystem.json --env development --source-map-support",
+    //   "post-deploy": "npm run nsinstall && npm run nsupdate && NODE_ENV=development pm2 reload ecosystem.json --env development --source-map-support",
     //   env: {}
     // }
   }
