@@ -33,7 +33,6 @@ moment.tz.setDefault('UTC')
 const models = require('../database/models')
 const middleware = require('./middleware')
 const pnotice = require('pushnotice')(`${config.slug}:server`, { env: config.env, chat: config.pushnotice.chat, debug: true, disabled: config.pushnotice.disabled })
-
 const redis = require('./redis')
 
 // Application
@@ -139,8 +138,8 @@ app.use('/', require('./router/routerHome.js').home())
 app.use(require('./router/routerError').error404)
 app.use(require('./router/routerError').error500)
 
-const server = app.listen(config.server.port, config.server.address, () => {
-  models.init()
+const server = app.listen(config.server.port, config.server.address, async () => {
+  await models.init()
   const host = server.address().address
   const port = server.address().port
   const livereloadDate = new Date()
