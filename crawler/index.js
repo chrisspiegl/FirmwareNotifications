@@ -7,6 +7,9 @@ const log = debug(`${config.slug}:crawler`)
 log.log = console.log.bind(console)
 const error = debug(`${config.slug}:crawler:error`)
 
+const pnotice = require('pushnotice')(`${config.slug}:crawler:index`, { env: config.env, chat: config.pushnotice.chat, debug: true, disabled: config.pushnotice.disabled })
+
+
 const cron = require('cron')
 const moment = require('moment-timezone')
 const pLimit = require('p-limit')
