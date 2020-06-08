@@ -86,7 +86,7 @@ const fetchModel = async (manufacturer, device) => {
       return versionInDatabase
     })
   } catch (err) {
-    pnotice(`fetchModel — ${manufacturer} - ${device} — Unrecognized Error\n${JSON.stringify(err)}`, 'ERROR')
+    pnotice(`fetchModel — ${manufacturer.name} ${device.name} — Unrecognized Error\n${JSON.stringify(err)}`, 'ERROR')
   }
 }
 
@@ -106,7 +106,7 @@ const start = async (manufacturer) => {
     // TODO: DO not understand why this is firing before the actual create / already have logs appear
     log(`Finished running ${manufacturer.name} crawler`)
   } catch (err) {
-    pnotice(`start — ${manufacturer} — Unrecognized Error\n${JSON.stringify(err)}`, 'ERROR')
+    pnotice(`start — ${manufacturer.name} — Unrecognized Error\n${JSON.stringify(err)}`, 'ERROR')
   }
 }
 
