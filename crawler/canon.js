@@ -107,6 +107,7 @@ const fetchModel = async (browser, manufacturer, device) => {
 }
 
 const start = async (manufacturer) => {
+  let browser
   try {
     log(`Running ${manufacturer.name} Crawler in ${process.env.NODE_ENV} environment`)
 
@@ -118,7 +119,7 @@ const start = async (manufacturer) => {
     }
 
     log(`Starting headless browser for ${manufacturer.name}`)
-    const browser = await startBrowser()
+    browser = await startBrowser()
 
     const pLimiter = pLimit(configParallelAccessPages)
 
@@ -134,7 +135,7 @@ const start = async (manufacturer) => {
     pnotice(`start ${manufacturer} — Unrecognized Error\n${JSON.stringify(err)}`, 'ERROR')
   } finally {
     log(`Closing headless browser for ${manufacturer.name}`)
-    await browser.close()
+    if (browser) await browser.close()
     log(`Closed headless browser for ${manufacturer.name}`)
   }
 }
