@@ -102,7 +102,7 @@ const fetchModel = async (browser, manufacturer, device) => {
       }
     })
   } catch (err) {
-    pnotice(`${key} — fetchModel — Unrecognized Error\n${JSON.stringify(err)}`, 'ERROR')
+    pnotice(`fetchModel - ${manufacturer} - ${device} — Unrecognized Error\n${JSON.stringify(err)}`, 'ERROR')
   }
 }
 
@@ -135,7 +135,7 @@ const start = async (manufacturer) => {
     await browser.close()
     log(`Closed headless browser for ${manufacturer.name}`)
   } catch (err) {
-    pnotice(`${key} — start — Unrecognized Error\n${JSON.stringify(err)}`, 'ERROR')
+    pnotice(`start ${manufacturer} — Unrecognized Error\n${JSON.stringify(err)}`, 'ERROR')
   }
 }
 
