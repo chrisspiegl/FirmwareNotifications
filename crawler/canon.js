@@ -130,12 +130,12 @@ const start = async (manufacturer) => {
 
     // TODO: DO not understand why this is firing before the actual create / already have logs appear
     log(`Finished running ${manufacturer.name} crawler`)
-
+  } catch (err) {
+    pnotice(`start ${manufacturer} — Unrecognized Error\n${JSON.stringify(err)}`, 'ERROR')
+  } finally {
     log(`Closing headless browser for ${manufacturer.name}`)
     await browser.close()
     log(`Closed headless browser for ${manufacturer.name}`)
-  } catch (err) {
-    pnotice(`start ${manufacturer} — Unrecognized Error\n${JSON.stringify(err)}`, 'ERROR')
   }
 }
 
