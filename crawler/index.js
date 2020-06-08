@@ -67,7 +67,7 @@ const start = async () => {
   log('Starting Crawler')
   await models.init()
   const CronJob = cron.CronJob;
-  const job = new CronJob('0 4 * * * *', run, null, true, 'UTC', this, true);
+  const job = new CronJob('0 0 4 * * *', run, null, true, 'UTC', this, true);
   job.start();
 }
 start()
